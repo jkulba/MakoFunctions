@@ -1,3 +1,4 @@
 {
-    "message": "Happy New Year"
+    "application": "Mako Azure Functions",
+    "version": "1.0.0"
 }
