@@ -82,5 +82,5 @@ jobs:
         with:
           name: mako-${{needs.init-job.outputs.output1}}
           path: ${{ github.workspace }}/Mako/obj/${{ env.BUILD_CONFIGURATION }}/net6.0/PubTmp/Out/
-          retention-days: 30
+          retention-days: 10
 
