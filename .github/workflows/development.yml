@@ -46,7 +46,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Show APP_VERSION
-        run: echo APP_VERSION ${{build-job.outputs.output1}}
+        run: echo APP_VERSION $APP_VERSION.${{ github.run_number }}
 
       - name: Show Build Date
         run: echo Build Date ${{needs.build-job.outputs.output2}}
@@ -54,7 +54,7 @@ jobs:
       - name: Create info json file
         uses: devops-actions/json-to-file@v1.0.1
         with:
-          json: '{"version":"${{needs.build-job.outputs.output1}}"}'
+          json: '{"version":"$APP_VERSION.${{ github.run_number }}"}'
           filename: "version.json"
 
       - name: GitHub Action for committing changes to a repository
