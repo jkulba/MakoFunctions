@@ -46,7 +46,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Show APP_VERSION
-        run: echo APP_VERSION ${{outputs.output1}}
+        run: echo APP_VERSION ${{build-job.outputs.output1}}
 
       - name: Show Build Date
         run: echo Build Date ${{needs.build-job.outputs.output2}}
