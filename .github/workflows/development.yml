@@ -57,6 +57,12 @@ jobs:
           json: '{"version":"${{needs.build-job.outputs.output1}}"}'
           filename: "version.json"
 
+      - name: GitHub Action for committing changes to a repository
+        uses: devops-infra/action-commit-push@v0.9.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Replaced foo with bar
+          
       - name: Build and package
         shell: bash
         run: |
