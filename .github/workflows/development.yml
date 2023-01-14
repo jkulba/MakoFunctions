@@ -30,7 +30,7 @@ jobs:
     outputs:
       output1: ${{ steps.get-version-step.outputs.app-version }}
       output2: ${{ steps.get-date-step.outputs.build-date }}
-      output3: ${{ steps.get-date-step.outputs.build-date }}
+      output3: ${{ steps.get-repository-name-step.outputs.repository-name }}
       output4: ${{ steps.get-date-step.outputs.build-date }}
       output5: ${{ steps.get-date-step.outputs.build-date }}
     steps:
@@ -49,14 +49,9 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           
       - uses: FranzDiebold/github-env-vars-action@v2.7.0
-      - name: GitHub Environment Variables Action
-        run: |
-          echo "repository=$CI_REPOSITORY_NAME"
-          echo "repository=$CI_REPOSITORY_NAME" >> $GITHUB_OUTPUT
-          echo "branch-name=$CI_REF_NAME"
-          echo "branch-name=$CI_REF_NAME" >> $GITHUB_OUTPUT
-          echo "built_by=$CI_ACTOR"
-          echo "built_by=$CI_ACTOR" >> $GITHUB_OUTPUT
+      - id: get-repository-name-step
+        run: echo "repository-name=$CI_REPOSITORY_NAME" >> $GITHUB_OUTPUT
+          
   build-job:
     runs-on: ubuntu-latest
     needs: init-job
@@ -73,7 +68,7 @@ jobs:
       - name: Create version json file
         uses: devops-actions/json-to-file@v1.0.1
         with:
-          json: '{"app_version": "${{needs.init-job.outputs.output1}}", "build_run": "${{ github.run_number }}", "build_commit_hash": "${{ GITHUB.SHA }}", "build_branch": "${{ GITHUB.REF }}", "build_date": "${{needs.init-job.outputs.output2}}"}'
+          json: '{"app_version": "${{needs.init-job.outputs.output1}}", "build_run": "${{ github.run_number }}", "build_commit_hash": "${{ GITHUB.SHA }}", "build_branch": "${{ GITHUB.REF }}", "build_date": "${{needs.init-job.outputs.output2}}", "repository": "${{needs.init-job.outputs.output3}}"}'
           filename: "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/version.json"
 
       - name: GitHub Action for committing changes to a repository
