@@ -80,7 +80,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: jobmetadata-${{needs.init-job.outputs.output1}}
-          path: ${{ github.workspace }}/JobMetaData/obj/Debug/net6.0/PubTmp/Out/
+          name: mako-${{needs.init-job.outputs.output1}}
+          path: ${{ github.workspace }}/Mako/obj/${{ env.BUILD_CONFIGURATION }}/net6.0/PubTmp/Out/
           retention-days: 30
 
