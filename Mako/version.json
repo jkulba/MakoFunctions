@@ -1,1 +1,9 @@
-{"app_version": "1.0.0.20", "build_run": "20", "build_commit_hash": "c1eb724f915e78ff60b4085d3dc8e4a6b2af1d0c", "build_branch": "develop", "build_date": "2023-01-14:04:24:44", "repository": "MakoFunctions", "built_by": "jkulba"}
+{
+    "app_version": "1.0.0.20",
+    "build_run": "20",
+    "build_commit_hash": "c1eb724f915e78ff60b4085d3dc8e4a6b2af1d0c",
+    "build_branch": "develop",
+    "build_date": "2023-01-14:04:24:44",
+    "repository": "MakoFunctions",
+    "built_by": "jkulba"
+}
