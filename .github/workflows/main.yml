@@ -5,9 +5,9 @@ on:
   # push:
   #   branches:
   #     - main
-  pull_request:
-    branches:
-      - main
+#   pull_request:
+#     branches:
+#       - main
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: "Mako"
@@ -70,12 +70,13 @@ jobs:
           json: '{"app_version": "${{needs.init-job.outputs.output1}}", "build_run": "${{ github.run_number }}", "build_commit_hash": "${{ GITHUB.SHA }}", "build_branch": "${{needs.init-job.outputs.output4}}", "build_date": "${{needs.init-job.outputs.output2}}", "repository": "${{needs.init-job.outputs.output3}}", "built_by": "${{needs.init-job.outputs.output5}}"}'
           filename: "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/version.json"
 
-      - name: GitHub Action for committing changes to a repository
+      - name: Commit changes to current branch
         uses: devops-infra/action-commit-push@v0.9.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_message: Update version
-          force: true
+          commit_prefix: "[AUTO]"
+          commit_message: Update build info in version.json 
+          force: false
 
       - name: Build and package
         shell: bash
