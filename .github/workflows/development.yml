@@ -2,13 +2,12 @@ name: Development Build
 
 on:
   workflow_dispatch:
-#   push:
-#     branches:
-#       - develop
-  # pull_request:
-  #   branches:
-  #     - develop
-
+  pull_request:
+    types:
+      - closed
+    branches:
+      - develop
+      
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: "Mako"
   DOTNET_CLI_TELEMETRY_OPTOUT: true
