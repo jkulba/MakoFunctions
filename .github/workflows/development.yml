@@ -67,14 +67,14 @@ jobs:
         uses: devops-actions/json-to-file@v1.0.1
         with:
           json: '{"app_version": "${{needs.init-job.outputs.output1}}", "build_run": "${{ github.run_number }}", "build_commit_hash": "${{ GITHUB.SHA }}", "build_branch": "${{needs.init-job.outputs.output4}}", "build_date": "${{needs.init-job.outputs.output2}}", "repository": "${{needs.init-job.outputs.output3}}", "built_by": "${{needs.init-job.outputs.output5}}"}'
-          filename: "version.json"
+          filename: "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/version.json"
 
       - name: GitHub Action for committing changes to a repository
         uses: devops-infra/action-commit-push@v0.9.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_prefix: "[AUTO]"
-          commit_message: Update build info in version.json 
+          commit_prefix: "[AUTO] "
+          commit_message: Update build info version.json 
           force: false
 
       - name: Build and package
@@ -88,7 +88,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: mako-${{needs.init-job.outputs.output1}}
+          name: mako-${{needs.init-job.outputs.output1}}-${{needs.init-job.outputs.output4}}
           path: ${{ github.workspace }}/Mako/obj/${{ env.BUILD_CONFIGURATION }}/net6.0/PubTmp/Out/
           retention-days: 10
 
