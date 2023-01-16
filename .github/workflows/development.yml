@@ -45,7 +45,7 @@ jobs:
       - id: get-repository-name-step
         run: echo "repository-name=$CI_REPOSITORY_NAME" >> $GITHUB_OUTPUT
       - id: get-branch-name-step
-        run: echo "branch-name=$CI_REF_NAME" >> $GITHUB_OUTPUT
+        run: echo "branch-name=$CI_REF" >> $GITHUB_OUTPUT
       - id: get-builder-step
         run: echo "builder-name=$CI_ACTOR" >> $GITHUB_OUTPUT
       
